@@ -30,6 +30,9 @@ Follow the instructions below to get started
 **Properties**
 
 table : specifies the default table to use if no table is provided in the request
+
 limit : specifies the default row limit to use if no limit is provided in the request
+
 offset : specifies the default row offset to use if no offset is provided in the request
+
 allowedTables: specifies the ist of tables that the script is allowed to access
