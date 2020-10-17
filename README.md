@@ -107,7 +107,7 @@ _POST_REQUEST("link-to-server/database.php", JSON.stringify(config), (response) 
 
 **Using WHERE IN**
 
-Example where the script will read the 'customers' table (limit:50,offset:0) then output all rows where 'CustomerId' is 2,3,4,5 or 6.  Note that the \_range() function is used to generate the array:
+Example where the script will read the 'customers' table (limit:50,offset:0) then output all rows where 'CustomerId' is 2,3,4,5 or 6:  
 ```js
 const config = {
   "table" : "customers",
@@ -121,5 +121,21 @@ _POST_REQUEST("link-to-server/database.php", JSON.stringify(config), (response) 
   document.querySelector('#out').innerHTML = _json2table(data, 'table table-striped');
 });
 ```
+Note that the \_range() function is used to generate the array:
 
 **Using WHERE INCLUDES**
+
+Example where the script will read the 'customers' table (limit:50,offset:0) then output all rows where 'CustomerAddress' includes 'London':
+```js
+const config = {
+  "table" : "customers",
+  "limit" : "50",
+  "offset" : "0"
+};
+
+_POST_REQUEST("link-to-server/database.php", JSON.stringify(config), (response) => {
+  var data = _where(JSON.parse(response), 'CustomerAddress', 'includes', 'London');
+
+  document.querySelector('#out').innerHTML = _json2table(data, 'table table-striped');
+});
+```
