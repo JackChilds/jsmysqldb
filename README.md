@@ -10,9 +10,10 @@ See installation and examples below to get started
 Follow the instructions below to get started
 
 1. Copy the contents of the /dist/server/ folder onto your server
-2. Edit the settings.json file that you copied to the server (see the settings section below)
-3. Link to the JS file 'database.js' in your HTML body section
-4. See examples to get started with reading your databases
+2. Edit lines 18 to 21 of database.php that you copied onto the server
+3. Edit the settings.json file that you copied to the server (see the settings section below)
+4. Link to the JS file 'database.js' in your HTML body section
+5. See examples to get started with reading your databases
 
 ## Settings
 
@@ -29,7 +30,44 @@ Follow the instructions below to get started
 
 **Properties**
 
-- table : specifies the default table to use if no table is provided in the request config
+- table : specifies the default table to use if no table is provided in the request config.  Case sensitive
 - limit : specifies the default row limit to use if no limit is provided in the request config
 - offset : specifies the default row offset to use if no offset is provided in the request config
-- allowedTables: specifies the ist of tables that the script is allowed to access
+- allowedTables: specifies the ist of tables that the script is allowed to access.  Case sensitive
+
+## Examples
+
+**Page Setup**
+An example of how to use the extension to read the first 50 lines of the table 'Customers':
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Example</title>
+
+  <!-- Link to Bootstrap for some basic styling-->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+</head>
+<body>
+  <h3>Read first 50 lines of table 'Customers'</h3>
+  <div id="out"></div>
+  <!-- Link to the database.js file -->
+  <script src="js/database.js"></script>
+
+  <script>
+    // Config that will be sent to server
+    const config = {
+      "table" : "customers",
+      "limit" : "50",
+      "offset" : "0"
+    };
+
+    // Use the _POST_REQUEST function to send data to the server and get a response
+    _POST_REQUEST("link-to-server/database.php", JSON.stringify(config), (response) => {
+      // Now use the _json2table method to output the database "customers" to #out.  Note the second parameter of the function _json2table is for any classes you would like to apply to the table
+      document.querySelector('#out').innerHTML = _json2table(JSON.parse(response), 'table table-striped');
+    });
+  </script>
+</body>
+</html>
+```
