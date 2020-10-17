@@ -139,3 +139,12 @@ _POST_REQUEST("link-to-server/database.php", JSON.stringify(config), (response) 
   document.querySelector('#out').innerHTML = _json2table(data, 'table table-striped');
 });
 ```
+
+**Using WHERE .NOT**
+
+To use where not simply add the string '.not' to the end of the operation ('is', 'in' or 'include')
+
+Example where the script will read the 'customers' table (limit:50,offset:0) then output all rows where 'CustomerName' is not 'bob':
+```js
+
+```
