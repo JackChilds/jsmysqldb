@@ -91,3 +91,16 @@ _POST_REQUEST("link-to-server/database.php", JSON.stringify(config), (response) 
 **Using WHERE IS**
 
 Example where the script will read the 'customers' table (offset:0,limit:50) then output all rows where 'CustomerName' is Bob
+```js
+const config = {
+  "table" : "customers",
+  "limit" : "50",
+  "offset" : "0"
+};
+
+_POST_REQUEST("link-to-server/database.php", JSON.stringify(config), (response) => {
+  var data = _where(JSON.parse(response), 'CustomerName', 'is', 'bob');
+
+  document.querySelector('#out').innerHTML = _json2table(data, 'table table-striped');
+});
+```
