@@ -121,3 +121,5 @@ _POST_REQUEST("link-to-server/database.php", JSON.stringify(config), (response) 
   document.querySelector('#out').innerHTML = _json2table(data, 'table table-striped');
 });
 ```
+
+**Using WHERE INCLUDES**
