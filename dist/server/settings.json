@@ -1,0 +1,6 @@
+{
+  "table": "vars",
+  "limit": "100",
+  "offset": "0",
+  "allowedTables": ["vars", "variables", "numbers"]
+}
