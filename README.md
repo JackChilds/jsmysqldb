@@ -87,3 +87,7 @@ _POST_REQUEST("link-to-server/database.php", JSON.stringify(config), (response) 
   document.querySelector('#out').innerHTML = _json2table(JSON.parse(response), 'table table-striped');
 });
 ```
+
+**Using WHERE IS**
+
+Example where the script will read the 'customers' table (offset:0,limit:50) then output all rows where 'CustomerName' is Bob
