@@ -38,6 +38,7 @@ Follow the instructions below to get started
 ## Examples
 
 **Page Setup**
+
 An example of how to use the extension to read the first 50 lines of the table 'Customers':
 ```html
 <!DOCTYPE html>
@@ -70,4 +71,19 @@ An example of how to use the extension to read the first 50 lines of the table '
   </script>
 </body>
 </html>
+```
+
+**Using Config Values**
+
+Example where the script will read the 'cities' table and get rows 10-40 (inclusive):
+```js
+const config = {
+  "table" : "cities",
+  "limit" : "30",
+  "offset" : "9"
+};
+
+_POST_REQUEST("link-to-server/database.php", JSON.stringify(config), (response) => {
+  document.querySelector('#out').innerHTML = _json2table(JSON.parse(response), 'table table-striped');
+});
 ```
