@@ -200,3 +200,4 @@ Function|Description|Example
 \_array_contains(array, searchFor, caseSensitive)|Use this function to quickly check if an array contains a value.  Returns true of false.|`if (_array_contains(myArray, "Some text", false)) {/* Do something */}`
 \_range(start, edge, step)|Use this function to generate an array.  Start inclusive and edge exclusive.  Step defaults to 1.|`var numbers = _range(1, 10, 1)`
 \_where(data, columnName, operation, match, caseSensitive)|Use this function to select rows from the data.  Column name is always case sensitive.  Case sensitive only applies to the match variable.  If case sensitive is not provided, it will default to false.  Operation can be: 'is', 'in', 'includes', 'is.not', 'in.not' or 'includes.not'.|`var bobs = _where(data, 'customerName', 'includes', 'Bob', false)`
+\_get_data_cols(data)|Use this function to get an array of all the columns in the data.|`var columns = _get_data_cols(data)`.
