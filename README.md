@@ -5,6 +5,13 @@ Send a GET or POST request to a PHP file on the server to get data from your dat
 
 See installation and examples below to get started
 
+## Contents
+
+- [Installation](#installation)
+- [Examples](#examples)
+- [Function Reference](#functionreference)
+- [Troubleshooting](#troubleshooting)
+
 ## Installation
 
 Follow the instructions below to get started
