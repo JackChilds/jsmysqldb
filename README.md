@@ -107,7 +107,7 @@ _POST_REQUEST("link-to-server/database.php", JSON.stringify(config), (response) 
 
 **Using WHERE IN**
 
-Example where the script will read the 'customers' table (limit:50,offset:0) then output all rows where 'CustomerId' is 2,3,4,5 or 6:  
+Example where the script will read the 'customers' table (limit:50,offset:0) then output all rows where 'CustomerId' in 2,3,4,5 or 6:  
 ```js
 const config = {
   "table" : "customers",
@@ -121,7 +121,7 @@ _POST_REQUEST("link-to-server/database.php", JSON.stringify(config), (response) 
   document.querySelector('#out').innerHTML = _json2table(data, 'table table-striped');
 });
 ```
-Note that the \_range() function is used to generate the array:
+Note that the \_range() function is used to generate the array.
 
 **Using WHERE INCLUDES**
 
@@ -146,5 +146,31 @@ To use where not simply add the string '.not' to the end of the operation ('is',
 
 Example where the script will read the 'customers' table (limit:50,offset:0) then output all rows where 'CustomerName' is not 'bob':
 ```js
+const config = {
+  "table" : "customers",
+  "limit" : "50",
+  "offset" : "0"
+};
 
+_POST_REQUEST("link-to-server/database.php", JSON.stringify(config), (response) => {
+  var data = _where(JSON.parse(response), 'CustomerName', 'is.not', 'bob');
+
+  document.querySelector('#out').innerHTML = _json2table(data, 'table table-striped');
+});
 ```
+
+Example where the script will read the 'customers' table (limit:50,offset:0) then output all rows where 'CustomerId' not in 2,3,4,5 or 6:
+```js
+const config = {
+  "table" : "customers",
+  "limit" : "50",
+  "offset" : "0"
+};
+
+_POST_REQUEST("link-to-server/database.php", JSON.stringify(config), (response) => {
+  var data = _where(JSON.parse(response), 'CustomerId', 'in.not', _range(2,7));
+
+  document.querySelector('#out').innerHTML = _json2table(data, 'table table-striped');
+});
+```
+Note that the \_range() function is used to generate the array.
