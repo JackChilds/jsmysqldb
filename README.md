@@ -198,4 +198,4 @@ Function|Description|Example
 \_POST_REQUEST(url, parameters, responseCallback)|Use this function to send a POST request and get back the result.|`_POST_REQUEST('http://example.com', 'x=y', (response) => {/* Start coding here */})`
 \_json2table(json, classes)|Use this function to generate a table from a parsed JSON object.  Classes parameter is not required.|`var table = _json2table(JSON.parse(response), 'table, table-dark')`
 \_array_contains(array, searchFor, caseSensitive)|Use this function to quickly check if an array contains a value.  Returns true of false.|`if (_array_contains(myArray, "Some text", false)) {/* Do something */}`
-\_range(start, edge, step)|Use this function to generate an array.  Start inclusive and edge exclusive.  Step defaults to 1.|`var numbers = _range(1,10, 1)`
+\_range(start, edge, step)|Use this function to generate an array.  Start inclusive and edge exclusive.  Step defaults to 1.|`var numbers = _range(1, 10, 1)`
