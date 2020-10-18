@@ -1,7 +1,4 @@
 <?php
-  error_reporting(E_ALL);
-  ini_set('display_errors', 1);
-
   header("Content-Type: application/json; charset=UTF-8");
 
   function checkTable($inputTable) {
@@ -15,6 +12,7 @@
   }
 
   function getData($tableToRead, $config) {
+    // Input the details of your server here ----------------------------------------------<<<<<
     $servername = "localhost";
     $username = "username";
     $password = "password";
