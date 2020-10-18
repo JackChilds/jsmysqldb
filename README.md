@@ -1,4 +1,7 @@
 # jsmysqldb
+
+## v1.0
+
 Access your mysql databases with pure Javascript
 
 This extension allows you to read SQL databases on your server with Javascript, by sending a POST request to a PHP file on the server.  It should be simple to use so read the installation and examples below to get started.
