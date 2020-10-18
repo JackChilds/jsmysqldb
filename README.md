@@ -9,7 +9,7 @@ See installation and examples below to get started
 
 - [Installation](#installation)
 - [Examples](#examples)
-- [Function Reference](#functionreference)
+- [Function Reference](#function-reference)
 - [Troubleshooting](#troubleshooting)
 
 ## Installation
