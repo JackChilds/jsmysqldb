@@ -16,9 +16,9 @@
 
   function getData($tableToRead, $config) {
     $servername = "localhost";
-    $username = "root";
-    $password = "root";
-    $dbname = "varjs";
+    $username = "username";
+    $password = "password";
+    $dbname = "database";
 
     $conn = new mysqli($servername, $username, $password, $dbname);
 
