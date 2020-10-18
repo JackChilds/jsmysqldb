@@ -64,7 +64,7 @@ An example of how to use the extension to read the first 50 lines of the table '
     };
 
     // Use the _POST_REQUEST function to send data to the server and get a response
-    _POST_REQUEST("link-to-server/database.php", JSON.stringify(config), (response) => {
+    _POST_REQUEST("link-to-server/database.php", 'config=' + JSON.stringify(config), (response) => {
       // Now use the _json2table method to output the database "customers" to #out.  Note the second parameter of the function _json2table is for any classes you would like to apply to the table
       document.querySelector('#out').innerHTML = _json2table(JSON.parse(response), 'table table-striped');
     });
@@ -83,7 +83,7 @@ const config = {
   "offset" : "9"
 };
 
-_POST_REQUEST("link-to-server/database.php", JSON.stringify(config), (response) => {
+_POST_REQUEST("link-to-server/database.php", 'config=' + JSON.stringify(config), (response) => {
   document.querySelector('#out').innerHTML = _json2table(JSON.parse(response), 'table table-striped');
 });
 ```
@@ -98,7 +98,7 @@ const config = {
   "offset" : "0"
 };
 
-_POST_REQUEST("link-to-server/database.php", JSON.stringify(config), (response) => {
+_POST_REQUEST("link-to-server/database.php", 'config=' + JSON.stringify(config), (response) => {
   var data = _where(JSON.parse(response), 'CustomerName', 'is', 'bob');
 
   document.querySelector('#out').innerHTML = _json2table(data, 'table table-striped');
@@ -115,7 +115,7 @@ const config = {
   "offset" : "0"
 };
 
-_POST_REQUEST("link-to-server/database.php", JSON.stringify(config), (response) => {
+_POST_REQUEST("link-to-server/database.php", 'config=' + JSON.stringify(config), (response) => {
   var data = _where(JSON.parse(response), 'CustomerId', 'in', _range(2,7));
 
   document.querySelector('#out').innerHTML = _json2table(data, 'table table-striped');
@@ -133,7 +133,7 @@ const config = {
   "offset" : "0"
 };
 
-_POST_REQUEST("link-to-server/database.php", JSON.stringify(config), (response) => {
+_POST_REQUEST("link-to-server/database.php", 'config=' + JSON.stringify(config), (response) => {
   var data = _where(JSON.parse(response), 'CustomerAddress', 'includes', 'London');
 
   document.querySelector('#out').innerHTML = _json2table(data, 'table table-striped');
@@ -152,7 +152,7 @@ const config = {
   "offset" : "0"
 };
 
-_POST_REQUEST("link-to-server/database.php", JSON.stringify(config), (response) => {
+_POST_REQUEST("link-to-server/database.php", 'config=' + JSON.stringify(config), (response) => {
   var data = _where(JSON.parse(response), 'CustomerName', 'is.not', 'bob');
 
   document.querySelector('#out').innerHTML = _json2table(data, 'table table-striped');
@@ -167,7 +167,7 @@ const config = {
   "offset" : "0"
 };
 
-_POST_REQUEST("link-to-server/database.php", JSON.stringify(config), (response) => {
+_POST_REQUEST("link-to-server/database.php", 'config=' + JSON.stringify(config), (response) => {
   var data = _where(JSON.parse(response), 'CustomerId', 'in.not', _range(2,7));
 
   document.querySelector('#out').innerHTML = _json2table(data, 'table table-striped');
@@ -183,9 +183,16 @@ const config = {
   "offset" : "0"
 };
 
-_POST_REQUEST("link-to-server/database.php", JSON.stringify(config), (response) => {
+_POST_REQUEST("link-to-server/database.php", 'config=' + JSON.stringify(config), (response) => {
   var data = _where(JSON.parse(response), 'CustomerAddress', 'includes.not', 'London');
 
   document.querySelector('#out').innerHTML = _json2table(data, 'table table-striped');
 });
 ```
+
+##Function Reference
+
+Function|Description|Example
+---|---|---
+\_GET_REQUEST(url, responseCallback)|Use this function to send a GET request and get back the result|`_GET_REQUEST('http://example.com', (response) => {/* Start coding here */})`
+\_POST_REQUEST(url, parameters, responseCallback)|Use this function to send a POST request and get back the result|`_POST_REQUEST('http://example.com', 'x=y', (response) => {/* Start coding here */})`
