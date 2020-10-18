@@ -1,16 +1,26 @@
 # jsmysqldb
 Access your mysql databases with pure Javascript
 
-Send a GET or POST request to a PHP file on the server to get data from your database
-
-See installation and examples below to get started
+This extension allows you to read SQL databases on your server with Javascript, by sending a POST request to a PHP file on the server.  It should be simple to use so read the installation and examples below to get started.
 
 ## Contents
 
+- [Notes](#notes)
+- [Disclousure](#disclosure)
 - [Installation](#installation)
+- [Settings](#settings)
 - [Examples](#examples)
 - [Function Reference](#function-reference)
 - [Troubleshooting](#troubleshooting)
+
+## Notes
+
+- You must **explitly** specify that the a table is allowed to be accessed
+- When the JSON is parsed in JS, data can be accessed in the following way: `data[row][columnName]`
+
+## Disclosure
+
+Although I have tried to make it as secure as possible, by using prepared statements, input validation methods, and ways to make sure that you can't read a different table (see settings.json 'allowedTables' array), I cannot guarantee complete security, if you do find an problem then please open an issue, and if you have then knowledge it would be great if you could submit a pull request that will fix this issue.
 
 ## Installation
 
