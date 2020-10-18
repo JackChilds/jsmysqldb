@@ -15,7 +15,7 @@ This extension allows you to read SQL databases on your server with Javascript, 
 
 ## Notes
 
-- You must **explitly** specify that the a table is allowed to be accessed
+- You must **explicitly** specify that the a table is allowed to be accessed
 - When the JSON is parsed in JS, data can be accessed in the following way: `data[row][columnName]`
 
 ## Disclosure
