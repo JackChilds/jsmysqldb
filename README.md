@@ -10,7 +10,7 @@ See installation and examples below to get started
 Follow the instructions below to get started
 
 1. Copy the contents of the /dist/server/ folder onto your server
-2. Edit lines 18 to 21 of database.php that you copied onto the server
+2. Edit lines 16 to 19 of database.php that you copied onto the server
 3. Edit the settings.json file that you copied to the server (see the settings section below)
 4. Link to the JS file 'database.js' in your HTML body section
 5. See examples to get started with reading your databases
