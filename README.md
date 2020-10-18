@@ -174,3 +174,18 @@ _POST_REQUEST("link-to-server/database.php", JSON.stringify(config), (response) 
 });
 ```
 Note that the \_range() function is used to generate the array.
+
+Example where the script will read the 'customers' table (limit:50,offset:0) then output all rows where 'CustomerAddress' does not include 'London':
+```js
+const config = {
+  "table" : "customers",
+  "limit" : "50",
+  "offset" : "0"
+};
+
+_POST_REQUEST("link-to-server/database.php", JSON.stringify(config), (response) => {
+  var data = _where(JSON.parse(response), 'CustomerAddress', 'includes.not', 'London');
+
+  document.querySelector('#out').innerHTML = _json2table(data, 'table table-striped');
+});
+```
