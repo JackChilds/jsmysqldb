@@ -84,7 +84,7 @@ const config = {
 };
 
 _POST_REQUEST("link-to-server/database.php", 'config=' + JSON.stringify(config), (response) => {
-  document.querySelector('#out').innerHTML = _json2table(JSON.parse(response), 'table table-striped');
+  document.querySelector('#out').innerHTML = _json2table(JSON.parse(response));
 });
 ```
 
@@ -101,7 +101,7 @@ const config = {
 _POST_REQUEST("link-to-server/database.php", 'config=' + JSON.stringify(config), (response) => {
   var data = _where(JSON.parse(response), 'CustomerName', 'is', 'bob');
 
-  document.querySelector('#out').innerHTML = _json2table(data, 'table table-striped');
+  document.querySelector('#out').innerHTML = _json2table(data);
 });
 ```
 
@@ -118,7 +118,7 @@ const config = {
 _POST_REQUEST("link-to-server/database.php", 'config=' + JSON.stringify(config), (response) => {
   var data = _where(JSON.parse(response), 'CustomerId', 'in', _range(2,7));
 
-  document.querySelector('#out').innerHTML = _json2table(data, 'table table-striped');
+  document.querySelector('#out').innerHTML = _json2table(data);
 });
 ```
 Note that the \_range() function is used to generate the array.
@@ -136,7 +136,7 @@ const config = {
 _POST_REQUEST("link-to-server/database.php", 'config=' + JSON.stringify(config), (response) => {
   var data = _where(JSON.parse(response), 'CustomerAddress', 'includes', 'London');
 
-  document.querySelector('#out').innerHTML = _json2table(data, 'table table-striped');
+  document.querySelector('#out').innerHTML = _json2table(data);
 });
 ```
 
@@ -155,7 +155,7 @@ const config = {
 _POST_REQUEST("link-to-server/database.php", 'config=' + JSON.stringify(config), (response) => {
   var data = _where(JSON.parse(response), 'CustomerName', 'is.not', 'bob');
 
-  document.querySelector('#out').innerHTML = _json2table(data, 'table table-striped');
+  document.querySelector('#out').innerHTML = _json2table(data);
 });
 ```
 
@@ -170,7 +170,7 @@ const config = {
 _POST_REQUEST("link-to-server/database.php", 'config=' + JSON.stringify(config), (response) => {
   var data = _where(JSON.parse(response), 'CustomerId', 'in.not', _range(2,7));
 
-  document.querySelector('#out').innerHTML = _json2table(data, 'table table-striped');
+  document.querySelector('#out').innerHTML = _json2table(data);
 });
 ```
 Note that the \_range() function is used to generate the array.
@@ -186,7 +186,7 @@ const config = {
 _POST_REQUEST("link-to-server/database.php", 'config=' + JSON.stringify(config), (response) => {
   var data = _where(JSON.parse(response), 'CustomerAddress', 'includes.not', 'London');
 
-  document.querySelector('#out').innerHTML = _json2table(data, 'table table-striped');
+  document.querySelector('#out').innerHTML = _json2table(data);
 });
 ```
 
@@ -194,5 +194,7 @@ _POST_REQUEST("link-to-server/database.php", 'config=' + JSON.stringify(config),
 
 Function|Description|Example
 ---|---|---
-\_GET_REQUEST(url, responseCallback)|Use this function to send a GET request and get back the result|`_GET_REQUEST('http://example.com', (response) => {/* Start coding here */})`
-\_POST_REQUEST(url, parameters, responseCallback)|Use this function to send a POST request and get back the result|`_POST_REQUEST('http://example.com', 'x=y', (response) => {/* Start coding here */})`
+\_GET_REQUEST(url, responseCallback)|Use this function to send a GET request and get back the result.|`_GET_REQUEST('http://example.com', (response) => {/* Start coding here */})`
+\_POST_REQUEST(url, parameters, responseCallback)|Use this function to send a POST request and get back the result.|`_POST_REQUEST('http://example.com', 'x=y', (response) => {/* Start coding here */})`
+\_json2table(json, classes)|Use this function to generate a table from a parsed JSON object.  Classes parameter is not required.|`var table = _json2table(JSON.parse(response), 'table, table-dark')`
+\_array_contains(array, searchFor, caseSensitive)|Use this function to quickly check if an array contains a value.  Returns true of false|`if (_array_contains(myArray, "Some text", false)) {/* Do something */}`
