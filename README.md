@@ -197,7 +197,7 @@ _POST_REQUEST("link-to-server/database.php", 'config=' + JSON.stringify(config),
 });
 ```
 
-##Function Reference
+## Function Reference
 
 Function|Description|Example
 ---|---|---
@@ -209,7 +209,7 @@ Function|Description|Example
 \_where(data, columnName, operation, match, caseSensitive)|Use this function to select rows from the data.  Column name is always case sensitive.  Case sensitive only applies to the match variable.  If case sensitive is not provided, it will default to false.  Operation can be: 'is', 'in', 'includes', 'is.not', 'in.not' or 'includes.not'.|`var bobs = _where(data, 'customerName', 'includes', 'Bob', false)`
 \_get_data_cols(data)|Use this function to get an array of all the columns in the data.|`var columns = _get_data_cols(data)`
 
-##Troubleshooting
+## Troubleshooting
 
 - Make sure that the table name, column names and any other case sensitive details are set correctly
 - Make sure that you have explicitly placed the table name for your database in the settings.json file on the server
