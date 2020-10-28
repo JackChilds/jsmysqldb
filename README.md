@@ -30,7 +30,7 @@ Although I have tried to make it as secure as possible, by using prepared statem
 Follow the instructions below to get started
 
 1. Copy the contents of the /dist/server/ folder onto your server
-2. Edit lines 16 to 20 of database.php that you copied onto the server
+2. Edit lines 16 to 20 of database.php that you copied onto the server, filling it out with the details of your mysql server
 3. Edit the settings.json file that you copied to the server (see the settings section below)
 4. Link to the JS file 'database.js' in your HTML body section
 5. See examples to get started with reading your databases
