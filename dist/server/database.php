@@ -17,8 +17,9 @@
     $username = "username";
     $password = "password";
     $dbname = "database";
+    $port = "8889";
 
-    $conn = new mysqli($servername, $username, $password, $dbname);
+    $conn = new mysqli($servername, $username, $password, $dbname, $port);
 
     $sql = "SELECT * FROM " . $tableToRead . " LIMIT ? OFFSET ?";
 
