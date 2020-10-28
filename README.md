@@ -1,6 +1,6 @@
 # jsmysqldb
 
-## v1.1.1
+## v1.1
 
 Access your mysql databases with pure Javascript
 
