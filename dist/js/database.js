@@ -53,7 +53,7 @@ function _where(data, colname, operation, match, caseSensitive) {
         break;
       case "is.not":
         for (var i = 0; i < data.length; i++) {
-          if (data[i][colname] != match) {
+          if (data[i][colname] != match && caseSensitive) {
             returnArray.push(data[i]);
           } else {
             if (data[i][colname].toLowerCase() != match.toLowerCase() && !caseSensitive) {
