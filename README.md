@@ -213,7 +213,7 @@ _POST_REQUEST("link-to-server/database.php", 'config=' + JSON.stringify(config),
 });
 ```
 
-### Use PHP where
+### Using PHP where
 
 To use PHP where then add the 'where' key to the config that is sent to the server.
 Note that the 'limit' is the amount of rows read before the database is searched, so if your database has 100 rows, you set the limit to 50, the where statement only applies to the 50 rows that are read, so it can return less than 50 rows
