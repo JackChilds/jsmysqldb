@@ -20,6 +20,7 @@ This extension allows you to read SQL databases on your server with Javascript, 
 
 - You must **explicitly** specify that the a table is allowed to be accessed
 - When the JSON is parsed in JS, data can be accessed in the following way: `data[row][columnName]`
+- Use PHP where statements (see examples) if you want to search the data on the server, whereas use JS where statements (see examples) if you want to use the end user's device to search the data
 
 ## Disclosure
 
