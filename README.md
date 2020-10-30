@@ -1,6 +1,6 @@
 # jsmysqldb
 
-## v1.1
+## v1.2
 
 Access your mysql databases with pure Javascript
 
@@ -44,6 +44,7 @@ Follow the instructions below to get started
   "table": "table",
   "limit": "100",
   "offset": "0",
+  "where": "false",
   "allowedTables": ["table"]
 }
 ```
@@ -53,6 +54,7 @@ Follow the instructions below to get started
 - table : specifies the default table to use if no table is provided in the request config.  Case sensitive
 - limit : specifies the default row limit to use if no limit is provided in the request config
 - offset : specifies the default row offset to use if no offset is provided in the request config
+- where : specifies the default where condition to use, false just means don't use a where statement by default.  This is the property that will be used if no where key is provided in the config
 - allowedTables: specifies the list of tables that the script is allowed to access.  Case sensitive
 
 ## Examples
@@ -107,6 +109,7 @@ _POST_REQUEST("link-to-server/database.php", 'config=' + JSON.stringify(config),
   document.querySelector('#out').innerHTML = _json2table(JSON.parse(response));
 });
 ```
+### Using JS *\_where(data, colname, operation, match, caseSensitive)* function
 
 **Using WHERE IS**
 
@@ -207,6 +210,61 @@ _POST_REQUEST("link-to-server/database.php", 'config=' + JSON.stringify(config),
   var data = _where(JSON.parse(response), 'CustomerAddress', 'includes.not', 'London');
 
   document.querySelector('#out').innerHTML = _json2table(data);
+});
+```
+
+### Use PHP where
+
+To use PHP where then add the 'where' key to the config that is sent to the server.
+Note that the 'limit' is the amount of rows read before the database is searched, so if your database has 100 rows, you set the limit to 50, the where statement only applies to the 50 rows that are read, so it can return less than 50 rows
+
+A where statement can be made using the following syntax:
+
+*column name*;*operation*;*match*;*case sensitive*
+
+Operations you can use: 'is', 'is.not', 'in', 'in.not', 'includes', 'includes.not'
+Case sensitivity defaults to false (so you can leave it out if you want).  Column name is always case sensitive.
+
+**E.g**
+
+Where customer name includes 'Jack' (not case sensitive): `'CustomerName;includes;Jack'`
+
+Where customer ID is not '145' (not case sensitive): `'CustomerID;is.not;145'`
+
+Where customer city not in \['London', 'Manchester', 'New York'] (case sensitive): `'CustomerCity;in.not;;true'`.  'whereArray': `['London', 'Manchester', 'New York']`
+
+Below are a few examples of using this syntax
+
+**WHERE IS**
+
+Example where the script will read the 'customers' table (limit:50,offset:0) then output all rows where 'Name' is 'Bob' (case sensitive):
+```js
+const config = {
+  "table": "customers",
+  "limit": "50",
+  "offset": "0",
+  "where": "Name;is;Bob;true"
+}
+
+_POST_REQUEST("link-to-server/database.php", 'config=' + JSON.stringify(config), (response) => {
+  document.querySelector('#out').innerHTML = _json2table(JSON.parse(response));
+});
+```
+
+**WHERE IN**
+
+Example where the script will read the 'customers' table (limit:50,offset:0) then output all rows where 'CustomerId' in 2,3,4,5 or 6 (case sensitive).  Note when using the operation 'in' or 'not.in' then you should add an extra key to the config called 'whereArray' to hold the array, and leave match part of the statement empty:
+```js 
+const config = {
+  "table": "customers",
+  "limit": "50",
+  "offset": "0",
+  "where": "Name;in;;true",
+  "whereArray": [2,3,4,5,6]
+}
+
+_POST_REQUEST("link-to-server/database.php", 'config=' + JSON.stringify(config), (response) => {
+  document.querySelector('#out').innerHTML = _json2table(JSON.parse(response));
 });
 ```
 
