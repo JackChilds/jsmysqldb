@@ -27,10 +27,119 @@
     $stmt->bind_param("ss", $config->limit, $config->offset);
     $stmt->execute();
     $result = $stmt->get_result();
-    return json_encode($result->fetch_all(MYSQLI_ASSOC));
+
+    return $result->fetch_all(MYSQLI_ASSOC);
 
     $stmt->close();
     $conn->close();
+  }
+
+  function _where ($data, $whereConfig, $mainConfig) {
+    $columns = _get_data_cols($data);
+    $operations = ["is", "in", "includes", "is.not", "in.not", "includes.not"];
+
+    $colNameIsOk = _array_contains($columns, $whereConfig[0], true);
+    $operationIsOk = _array_contains($operations, $whereConfig[1], false);
+
+    $returnArray = [];
+
+    $colName = $whereConfig[0];
+    $match = $whereConfig[2];
+    $caseSensitive = $whereConfig[3];
+
+    if ($caseSensitive == "false" || $caseSensitive == false) {
+      $caseSensitive = false;
+    } else {
+      $caseSensitive = true;
+    }
+
+    if ($colNameIsOk && $operationIsOk) {
+      switch (strtolower($whereConfig[1])) {
+        case "is":
+          for ($i = 0; $i < count($data); $i++) {
+            if ($data[$i][$colName] == $match) {
+              array_push($returnArray, $data[$i]);
+            } else {
+              if (strtolower($data[$i][$colName]) == strtolower($match) && !$caseSensitive) {
+                array_push($returnArray, $data[$i]);
+              }
+            }
+          }
+          break;
+        case "in":
+          if (isset($mainConfig->whereArray)) {
+            for ($i=0; $i < count($data); $i++) {
+              if (_array_contains($mainConfig->whereArray, $data[$i][$colName], $caseSensitive)) {
+                array_push($returnArray, $data[$i]);
+              }
+            }
+          }
+          break;
+        case "includes":
+          for ($i=0; $i < count($data); $i++) {
+            if (strpos($data[$i][$colName], $match) !== false) {
+              array_push($returnArray, $data[$i]);
+            } else {
+              if (stripos($data[$i][$colName], $match) !== false && !$caseSensitive) {
+                array_push($returnArray, $data[$i]);
+              }
+            }
+          }
+          break;
+        case "is.not":
+          for ($i=0; $i < count($data); $i++) {
+            if ($data[$i][$colName] != $match && $caseSensitive) {
+              array_push($returnArray, $data[$i]);
+            } else {
+              if (strtolower($data[$i][$colName]) != strtolower($match) && !$caseSensitive) {
+                array_push($returnArray, $data[$i]);
+              }
+            }
+          }
+          break;
+        case "in.not":
+          if (isset($mainConfig->whereArray)) {
+            for ($i=0; $i < count($data); $i++) {
+              if (!_array_contains($mainConfig->whereArray, $data[$i][$colName], $caseSensitive)) {
+                array_push($returnArray, $data[$i]);
+              }
+            }
+          }
+          break;
+        case "includes.not":
+          for ($i=0; $i < count($data); $i++) {
+            if (strpos($data[$i][$colName], $match) !== false) {
+              continue;
+            } else {
+              if (stripos($data[$i][$colName], $match) !== false && !$caseSensitive) {
+                continue;
+              } else {
+                array_push($returnArray, $data[$i]);
+              }
+            }
+          }
+          break;
+      }
+    }
+
+    return $returnArray;
+  }
+
+  function _get_data_cols($data) {
+    return array_keys($data[0]);
+  }
+
+  function _array_contains ($arr, $searchFor, $caseSensitive) {
+    if ($caseSensitive) {
+      return in_array($searchFor, $arr);
+    } else {
+      for ($i=0; $i < count($arr); $i++) {
+        if (strtolower($arr[$i]) == strtolower($searchFor)) {
+          return true;
+        }
+      }
+    }
+    return false;
   }
 
   if (isset($_REQUEST["config"])) {
@@ -45,9 +154,25 @@
     if (!isset($config->offset)) {
       $config->offset = $_settingsConfig->offset;
     }
+    if (!isset($config->where)) {
+      $config->where = $_settingsConfig->where;
+    }
   } else {
     $config = json_decode(file_get_contents("settings.json"), false);
   }
 
-  echo getData(checkTable($config->table), $config);
+  if ($config->where == false || $config->where == "false") {
+    echo json_encode(getData(checkTable($config->table), $config));
+  } else {
+    $whereArray = explode(";", $config->where);
+    if (count($whereArray) === 3 || count($whereArray) === 4) {
+      if (count($whereArray) === 3) {
+        array_push($whereArray, "false");
+      }
+      $tableData = getData(checkTable($config->table), $config);
+      echo json_encode(_where($tableData, $whereArray, $config));
+    } else {
+      echo json_encode(getData(checkTable($config->table), $config));
+    }
+  }
 ?>
