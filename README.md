@@ -1,6 +1,6 @@
 # jsmysqldb
 
-### **⭐️ - Please Star If You Like**
+### **⭐️ Please Star If You Like**
 
 ## v1.2
 
