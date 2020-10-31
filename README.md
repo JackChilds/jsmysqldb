@@ -1,5 +1,7 @@
 # jsmysqldb
 
+### **⭐️ - Please Star If You Like**
+
 ## v1.2
 
 Access your mysql databases with pure Javascript
