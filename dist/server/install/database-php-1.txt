@@ -1,0 +1,15 @@
+<?php
+  header("Content-Type: application/json; charset=UTF-8");
+
+  function checkTable($inputTable) {
+    $settings = json_decode(file_get_contents("settings.json"), false);
+
+    if (in_array($inputTable, $settings->allowedTables)) {
+      return $inputTable;
+    } else {
+      return $settings->table;
+    }
+  }
+
+  function getData($tableToRead, $config) {
+    /* Input the details of your server here ----------------------------------------------<<<<< */
