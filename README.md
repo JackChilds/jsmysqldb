@@ -2,11 +2,15 @@
 
 ### **⭐️ Please Star If You Like**
 
-## v1.2
+## v1.2.1
 
 Access your mysql databases with pure Javascript
 
 This extension allows you to read SQL databases on your server with Javascript, by sending a POST request to a PHP file on the server.  It should be simple to use so read the installation and examples below to get started.
+
+## Whats New In Version 1.2.1
+
+In this new version there is a new feature which should make it a lot easier to get started with JSMYSQLDB.  Now, inside dist/server there is a new folder called install, when you navigate to this folder on your server it will load up a page where you can fill out the details of your server and set your configuration, this is instead of manually editing the files, which will help as when this project gets bigger then it will be much easier than searching the files for lines you should edit.  Please note that you should remove the install directory after you have set it up as by leaving it there then anyone can change the configuration files on your server.
 
 ## Contents
 
@@ -33,10 +37,9 @@ Although I have tried to make it as secure as possible, by using prepared statem
 Follow the instructions below to get started
 
 1. Copy the contents of the /dist/server/ folder onto your server
-2. Edit lines 16 to 20 of database.php that you copied onto the server, filling it out with the details of your mysql server
-3. Edit the settings.json file that you copied to the server (see the settings section below)
-4. Link to the JS file 'database.js' in your HTML body section
-5. See examples to get started with reading your databases
+2. In your web browser navigate to the install folder that you just added in step 1 (install is located inside /dist/server/), fill out the details of your server and then remove the install directory from your server
+3. Link to the JS file 'database.js' in the HTML body section of your website that you would like to connect from
+4. See the examples section to get started with reading your databases
 
 ## Settings
 
